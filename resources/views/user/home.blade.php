@@ -13,7 +13,7 @@
                 <div class="container">
                     <h1 class="fw-bold"> DIQIR COLLECTION </h1>
                     <p class="fs-5 mt-3">
-                        Brand pakaian terpercaya untuk seragam sekolah & baju harian ✨
+                        Brand pakaian terpercaya untuk seragam sekolah & baju harian 
                     </p>
                     <a href="{{ route('produk') }}" class="btn btn-success btn-lg mt-3">
                         Lihat Produk 
@@ -98,7 +98,7 @@
 <!-- ABOUT -->
 <div class="row mb-5">
     <div class="col-md-6">
-        <h3 class="fw-bold">Tentang Kami 💚</h3>
+        <h3 class="fw-bold">Tentang Kami </h3>
         <p class="text-muted">
             DIQIR COLLECTION adalah perusahaan yang bergerak di bidang fashion,
             khususnya pakaian dan seragam sekolah dari SD, SMP, SMA/SMK hingga Guru.
@@ -107,22 +107,22 @@
     </div>
 
     <div class="col-md-6">
-        <h3 class="fw-bold">Kenapa Pilih Kami? ⭐</h3>
+        <h3 class="fw-bold">Kenapa Pilih Kami? </h3>
         <ul class="text-muted">
-            <li>✔️ Bahan nyaman & berkualitas</li>
-            <li>✔️ Ukuran lengkap</li>
-            <li>✔️ Harga ramah kantong</li>
-            <li>✔️ Cocok untuk sekolah & formal</li>
+            <li>Bahan nyaman & berkualitas</li>
+            <li>Ukuran lengkap</li>
+            <li>Harga ramah kantong</li>
+            <li>Cocok untuk sekolah & formal</li>
         </ul>
     </div>
 </div>
 
 <!-- PROMO -->
 <div class="alert alert-success text-center shadow-sm">
-    <h4 class="fw-bold mb-2">🎉 PROMO SPESIAL 🎉</h4>
+    <h4 class="fw-bold mb-2">PROMO SPESIAL</h4>
     <p class="mb-1 fs-5">
         Potongan <strong>Rp 20.000</strong> untuk pembelian di atas
-        <strong>Rp 450.000</strong> 💸
+        <strong>Rp 450.000</strong> 
     </p>
     <small class="text-muted">
         *Syarat dan ketentuan berlaku dari tanggal 28 januari - 28 februari 2026
@@ -139,7 +139,7 @@
                 <h5 class="fw-bold">About Diqir</h5>
                 <p class="text-muted">
                     Diqir Collection menyediakan pakaian berkualitas
-                    dengan desain modern dan nyaman digunakan 👕✨
+                    dengan desain modern dan nyaman digunakan 
                 </p>
             </div>
 
@@ -166,8 +166,7 @@
 
                 <div class="d-flex gap-3 fs-4">
                     <span><img src="" alt=""></span>
-                    <span>▶️</span>
-                    <span>🎵</span>
+                    
                 </div>
             </div>
 
