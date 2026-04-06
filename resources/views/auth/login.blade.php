@@ -9,7 +9,7 @@
             <div class="card-body p-4">
 
                 <h3 class="text-center fw-bold mb-4" style="color:#4C8C6B;">
-                    Login Akun 💚
+                    Login Akun 
                 </h3>
 
                 <form method="POST" action="{{ route('login') }}">
@@ -51,7 +51,7 @@
                     <!-- BUTTON -->
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success">
-                            Login 🚀
+                            Login 
                         </button>
                     </div>
                 </form>
@@ -61,7 +61,7 @@
                 <p class="text-center mb-0">
                     Belum punya akun?
                     <a href="{{ route('register') }}" class="fw-bold text-success">
-                        Daftar sekarang ✨
+                        Daftar sekarang 
                     </a>
                 </p>
 
