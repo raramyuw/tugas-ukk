@@ -4,7 +4,7 @@
 
 <div class="container my-5">
 
-    <h2 class="fw-bold mb-4" style="color:#4C8C6B;">
+    <h2 class="fw-bold mb-4" style="color:#8ae0ae;">
         Tambah Ulasan/Komentar Anda
     </h2>
 

@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'user_id',
-        'produk_id',
-        'jumlah',
-        'status'
+        'name', 'description', 'price', 'stock', 'image'
     ];
 
-
-    public function carts()
+    // Accessor untuk mengambil URL gambar
+    public function getImageUrlAttribute()
     {
-        return $this->hasMany(Cart::class);
+        if ($this->image && file_exists(storage_path('app/public/' . $this->image))) {
+            return asset('storage/' . $this->image);
+        }
+        return asset('images/default.jpg');
     }
 }

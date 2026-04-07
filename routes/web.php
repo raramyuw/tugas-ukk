@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Models\Order;
 
 // =======================
@@ -15,9 +18,7 @@ Route::get('/', function () {
     return view('user.home');
 })->name('home');
 
-Route::get('/produk', function () {
-    return view('user.produk');
-})->name('produk');
+Route::get('/produk', [ProductController::class, 'index'])->name('produk');
 
 Route::get('/tentang', function () {
     return view('user.tentang');
@@ -25,14 +26,12 @@ Route::get('/tentang', function () {
 
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan');
 
-
 // =======================
-// HALAMAN USER
+// HALAMAN USER (AUTH)
 // =======================
 
 Route::middleware(['auth'])->group(function () {
 
-    // Keranjang
     Route::post('/keranjang/tambah', function () {
         $cart = session()->get('cart', []);
         $cart[] = [
@@ -85,7 +84,6 @@ Route::middleware(['auth'])->group(function () {
         return back();
     })->name('keranjang.kosongkan');
 
-    // Checkout
     Route::get('/checkout', function () {
         $cart = session()->get('cart', []);
         if (empty($cart)) return redirect()->route('keranjang');
@@ -99,71 +97,67 @@ Route::middleware(['auth'])->group(function () {
         $total = 0;
         foreach ($cart as $item) {
             $total += $item['harga'] * $item['qty'];
+            
+            $product = \App\Models\Product::where('name', $item['nama'])->first();
+            if ($product) {
+                $product->stock -= $item['qty'];
+                $product->save();
+            }
         }
 
         $order = \App\Models\Order::create([
             'user_id' => Auth::id(),
             'produk'  => json_encode($cart),
             'total'   => $total,
-            'status'  => 'Menunggu Pembayaran',
+            'status'  => 'pending',
+            'no_hp'   => Auth::user()->no_hp,
+            'shipping_address' => Auth::user()->alamat,
         ]);
 
         session()->forget('cart');
-        return redirect()->route('pembayaran', $order->id)
-            ->with('success', 'Pesanan berhasil!');
+        return redirect()->route('pembayaran', $order->id)->with('success', 'Pesanan berhasil!');
     })->name('checkout.proses');
 
     Route::get('/pembayaran/{id}', function ($id) {
+        $order = \App\Models\Order::findOrFail($id);
+        return view('user.pembayaran', compact('order'));
+    })->name('pembayaran');
 
-    $order = \App\Models\Order::findOrFail($id);
-
-    return view('user.pembayaran', compact('order'));
-
-})->name('pembayaran');
-
-    // Riwayat
     Route::get('/riwayat', function () {
         $orders = Order::where('user_id', Auth::id())->latest()->get();
         return view('user.riwayat', compact('orders'));
     })->name('riwayat');
 
-    // Ulasan
     Route::get('/ulasan/tambah', [UlasanController::class, 'create'])->name('ulasan.create');
     Route::post('/ulasan/simpan', [UlasanController::class, 'store'])->name('ulasan.store');
 
-    // Profil User
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-
 });
-
 
 // =======================
 // HALAMAN ADMIN
 // =======================
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', function () {
-        if (Auth::user()?->role !== 'admin') abort(403);
-        return app(AdminController::class)->index(request());
-    })->name('admin');
+    return view('admin.index');
+})->name('dashboard');
 
-    Route::post('/update-status/{id}', [AdminController::class, 'updateStatus'])
-        ->name('admin.updateStatus');
+    Route::resource('products', AdminProductController::class);
+    Route::resource('orders', OrderController::class);
+    
+    // ROUTE UPDATE STATUS UNTUK ORDER
+    Route::post('orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-    Route::delete('/delete/{id}', [AdminController::class, 'delete'])
-        ->name('admin.delete');
+    Route::post('/update-status/{id}', [AdminController::class, 'updateStatus'])->name('updateStatus');
+    Route::delete('/delete/{id}', [AdminController::class, 'delete'])->name('delete');
+    Route::get('/filter', [AdminController::class, 'filter'])->name('filter');
 
-    Route::get('/filter', [AdminController::class, 'filter'])
-        ->name('admin.filter');
-
-    // Profil Admin
-    Route::get('/profile', [ProfileController::class, 'adminIndex'])->name('admin.profile');
-    Route::post('/profile/update', [ProfileController::class, 'adminUpdate'])->name('admin.profile.update');
-
+    Route::get('/profile', [ProfileController::class, 'adminIndex'])->name('profile');
+    Route::post('/profile/update', [ProfileController::class, 'adminUpdate'])->name('profile.update');
 });
-
 
 // =======================
 // AUTH

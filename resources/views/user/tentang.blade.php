@@ -6,7 +6,7 @@
 
     <!-- JUDUL -->
     <div class="text-center mb-5">
-        <h1 class="fw-bold" style="color:#4C8C6B;">
+        <h1 class="fw-bold" style="color:#8ae0ae;">
             Tentang Kami 
         </h1>
         <p class="text-muted mt-2">
@@ -44,7 +44,7 @@
         <div class="col-md-6 mb-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h4 class="fw-bold" style="color:#4C8C6B;">Visi</h4>
+                    <h4 class="fw-bold" style="color:#8ae0ae;">Visi</h4>
                     <p class="text-muted mt-2">
                         Menjadi penyedia pakaian dan seragam terbaik yang
                         mengutamakan kualitas, kenyamanan, dan kepuasan pelanggan.
@@ -56,7 +56,7 @@
         <div class="col-md-6 mb-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
-                    <h4 class="fw-bold" style="color:#4C8C6B;">Misi</h4>
+                    <h4 class="fw-bold" style="color:#8ae0ae;">Misi</h4>
                     <ul class="text-muted mt-2">
                         <li>Menyediakan produk berkualitas tinggi</li>
                         <li>Memberikan harga yang terjangkau</li>

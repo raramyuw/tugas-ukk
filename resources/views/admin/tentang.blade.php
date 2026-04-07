@@ -71,7 +71,7 @@
     <!-- PROMO -->
     <div class="card border-0 shadow-sm p-4 text-center" style="background:#E8F5EE;">
         <h3 class="fw-bold" style="color:#3A6F57;">
-            🎉 Promo Spesial 🎉
+            Promo Spesial
         </h3>
 
         <p class="mt-3">
@@ -80,7 +80,7 @@
         </p>
 
         <p class="mb-0 fst-italic">
-            Yuk belanja sekarang sebelum kehabisan 😍
+            Yuk belanja sekarang sebelum kehabisan 
         </p>
     </div>
 

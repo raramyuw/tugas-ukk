@@ -6,24 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-{
-    Schema::create('orders', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-        $table->text('produk');
-        $table->integer('total');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('produk'); // menyimpan data produk dalam bentuk JSON
+            $table->integer('total');
+            $table->string('status')->default('pending'); // pending, diproses, dikirim, selesai, batal
+            $table->string('payment_method')->nullable(); // metode pembayaran
+            $table->text('shipping_address')->nullable(); // alamat pengiriman
+            $table->string('no_hp')->nullable(); // nomor telepon
+            $table->timestamps();
+        });
+    }
 
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('orders');
