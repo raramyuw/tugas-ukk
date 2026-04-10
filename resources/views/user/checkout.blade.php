@@ -8,6 +8,18 @@
         Checkout
     </h2>
 
+    <!-- ===== DATA USER (SIMPLE, DI ATAS BARANG) ===== -->
+    <div class="mb-4">
+        <p><strong>{{ auth()->user()->name }}, </strong> {{ auth()->user()->no_hp }},
+        {{ auth()->user()->alamat }}, {{ auth()->user()->kota }} - {{ auth()->user()->kode_pos }}</p>
+         
+    </div>
+
+    <hr>
+
+    <!-- ===== BARANG YANG DIBELI (DENGAN FOTO) ===== -->
+    <h5 class="fw-bold mb-3">Barang yang dibeli:</h5>
+
     @php $total = 0; @endphp
 
     @foreach($cart ?? [] as $item)
@@ -16,11 +28,16 @@
             $total += $subtotal;
         @endphp
 
-        <div class="d-flex justify-content-between mb-2">
-            <div>
-                {{ $item['nama'] }} ({{ $item['qty'] }})
+        <div class="d-flex align-items-center gap-3 mb-3">
+            
+            <!-- INFO BARANG -->
+            <div class="flex-grow-1">
+                <div class="fw-bold">{{ $item['nama'] }}</div>
+                <div class="text-muted small">Jumlah: {{ $item['qty'] }}</div>
             </div>
-            <div>
+
+            <!-- HARGA -->
+            <div class="text-success fw-bold">
                 Rp {{ number_format($subtotal,0,',','.') }}
             </div>
         </div>
@@ -36,8 +53,8 @@
 
     <form method="POST" action="{{ route('checkout.proses') }}">
         @csrf
-        <button class="btn btn-success mt-3">
-            Bayar Sekarang
+        <button class="btn btn-success mt-3 px-4">
+            Buat Pesanan
         </button>
     </form>
 

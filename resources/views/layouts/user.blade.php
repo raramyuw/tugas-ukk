@@ -27,6 +27,7 @@
             {{-- BRAND --}}
             <a class="navbar-brand fw-bold text-white" href="{{ auth()->check() && auth()->user()->role === 'admin' ? route('admin.dashboard') : route('home') }}">
                 DIQIR KONVEKSI
+               
                 @auth
                     @if(auth()->user()->role === 'admin')
                         <small class="text-warning">(Admin)</small>

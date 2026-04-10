@@ -12,7 +12,7 @@
 @endif
 
     <h2 class="fw-bold mb-4" style="color:#8ae0ae;">
-        🛒 Keranjang Belanja
+        Keranjang Saya
     </h2>
 
     @if(!empty($cart))
